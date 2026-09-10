@@ -22,6 +22,8 @@ c=10
 b=23
 print(c+b)
 
+cv=c+b
+print(cv)
 
 
 
