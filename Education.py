@@ -23,7 +23,6 @@ b=23
 print(c+b)
 
 cv=c+b
-print(cv)
 
-
+print('aaaaaaaaaaaaaaaaaaaaaa')
 
