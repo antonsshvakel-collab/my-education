@@ -18,5 +18,10 @@ print("Hello")
 a=10
 print(a)
 
+c=10
+b=23
+print(c+b)
+
+
 
 
