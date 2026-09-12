@@ -1,3 +1,4 @@
+from __future__ import annotations
 import math
 import random
 import os
@@ -14,18 +15,17 @@ import threading
 
 
 
-print("Hello")
-a=10
-print(a)
+value=max('aAb','aAa')
+print(value)
 
-c=10
-b=23
-print(c+b)
+square={2:4,8:160,32:64}
 
-cv=c+b
+key1=max(square)
+print(key1)
 
-print('aaaaaaaaaaaaaaaaaaaaaa')
+key2=max(square,key=lambda k:square[k])
+print(key2,square[key2])
 
-print('hue')
-a=100
+res=max(1,2,3-.56,24324)
+print(res)
 
