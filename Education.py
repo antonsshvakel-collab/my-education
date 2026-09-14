@@ -15,17 +15,54 @@ import threading
 
 
 
-value=max('aAb','aAa')
-print(value)
+with open('demofile.txt','a+',encoding='utf-8') as f:
+    pass
 
-square={2:4,8:160,32:64}
+class Alphabet:
+    def __init__(self,stroka:str='') -> None:
+        self._stroka=stroka
 
-key1=max(square)
-print(key1)
+    @property
+    def stroka(self)->str:
+        return self._stroka
 
-key2=max(square,key=lambda k:square[k])
-print(key2,square[key2])
+    @stroka.setter
+    def stroka(self,value:str)->None:
+        self._stroka=value
 
-res=max(1,2,3-.56,24324)
-print(res)
+    @stroka.deleter
+    def stroka(self)->None:
+        print("Deliting")
+        del self._stroka
 
+
+x=Alphabet()
+print(x.stroka)
+x.stroka='Abdul Ballout'
+print(x.stroka)
+
+delattr(x,'stroka')
+print(hasattr(x,'stroka'))
+
+numbers=range(0,101,2)
+for item in numbers:
+    print(item,end=' ')
+
+print(type(numbers),list(numbers),list(range(-45,-100,-5)))
+
+
+nums='foooo'
+
+pr=repr(nums)
+print(repr(nums))
+
+class Person:
+    name='Adam'
+
+    def __repr__(self) -> builtins.str:
+        return repr(f'Hello {self.name}')
+
+    def __str__(self) -> builtins.str:
+        return f'Hello {self.name}'
+
+print(repr(Person()))
