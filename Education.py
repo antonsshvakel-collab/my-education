@@ -1,4 +1,6 @@
 from __future__ import annotations
+from decimal import Decimal
+from typing import Self
 import math
 import random
 import os
@@ -13,56 +15,18 @@ import pytz
 import time
 import threading
 
+languages = ['Java', 'Python', 'JavaScript']
+versions = [-0.98,14, 3, 6,10]
+ahaha=(1,2,3,4,5)
 
+result=zip(languages,versions,ahaha)
+list_res=list(result)
+z,x,c=zip(*list_res)
+print(z,x,list(c))
 
-with open('demofile.txt','a+',encoding='utf-8') as f:
-    pass
+mathematict=__import__('math',globals(),locals(),[],0)
+print(mathematict.fabs(-0.09),math.fabs(10-15.97))
 
-class Alphabet:
-    def __init__(self,stroka:str='') -> None:
-        self._stroka=stroka
-
-    @property
-    def stroka(self)->str:
-        return self._stroka
-
-    @stroka.setter
-    def stroka(self,value:str)->None:
-        self._stroka=value
-
-    @stroka.deleter
-    def stroka(self)->None:
-        print("Deliting")
-        del self._stroka
-
-
-x=Alphabet()
-print(x.stroka)
-x.stroka='Abdul Ballout'
-print(x.stroka)
-
-delattr(x,'stroka')
-print(hasattr(x,'stroka'))
-
-numbers=range(0,101,2)
-for item in numbers:
-    print(item,end=' ')
-
-print(type(numbers),list(numbers),list(range(-45,-100,-5)))
-
-
-nums='foooo'
-
-pr=repr(nums)
-print(repr(nums))
-
-class Person:
-    name='Adam'
-
-    def __repr__(self) -> builtins.str:
-        return repr(f'Hello {self.name}')
-
-    def __str__(self) -> builtins.str:
-        return f'Hello {self.name}'
-
-print(repr(Person()))
+x=-9
+mathematict.fabs(x)
+math.fabs(x)
