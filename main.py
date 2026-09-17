@@ -1,20 +1,21 @@
-from __future__ import annotations
-from decimal import Decimal
-from typing import Self
 from dataclasses import dataclass
 import math
 import random
-import os
-import shutil
-import builtins
-import cmath
-import re
-import keyword
-import asyncio
-from datetime import datetime, date
-import pytz
-import time
-import threading
+
+def calculate_y(s:int,t:int,x:float)->float:
+        return math.atan(pow(x,1/t))/pow(x,2)+s*math.sin(math.log(x))
+
+
+'''if __name__=='__main__':
+    try:
+        s=int(input('Enter value of s: '))
+        t=int(input('Enter value of t: '))
+        x=float(input('Enter value of x: '))
+        print(calculate_y(s,t,x))
+
+    except (ZeroDivisionError , ValueError) as error:
+        print(f'Error {error}' )
+'''
 
 @dataclass
 class Simulation_Statistic:
@@ -116,4 +117,6 @@ if __name__=='__main__':
         print(f'Clone winrate {battle_list.clone_winrate}', f'Droids winrate {battle_list.droids_winrate}', f'Medium rounds {battle_list.medium_round_count}' ,f'Clone survability {battle_list.clone_survivale}', f'Droids survability {battle_list.droids_survivale}',sep='\n')
     except ValueError as error:
         print(f'Error occur {error}')
+
+
 
