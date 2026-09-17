@@ -2,20 +2,6 @@ from dataclasses import dataclass
 import math
 import random
 
-def calculate_y(s:int,t:int,x:float)->float:
-        return math.atan(pow(x,1/t))/pow(x,2)+s*math.sin(math.log(x))
-
-
-'''if __name__=='__main__':
-    try:
-        s=int(input('Enter value of s: '))
-        t=int(input('Enter value of t: '))
-        x=float(input('Enter value of x: '))
-        print(calculate_y(s,t,x))
-
-    except (ZeroDivisionError , ValueError) as error:
-        print(f'Error {error}' )
-'''
 
 @dataclass
 class Simulation_Statistic:
