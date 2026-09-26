@@ -11,6 +11,13 @@ class Simulation_Statistic:
     clone_survivale:float
     droids_survivale:float
 
+    def __str__(self)->str:
+        return (f'Clone winrate: {battle_list.clone_winrate}\n'
+        f'Droids winrate: {battle_list.droids_winrate}\n'
+        f'Medium rounds: {battle_list.medium_round_count}\n' 
+        f'Clone survability: {battle_list.clone_survivale}\n'
+        f'Droids survability: {battle_list.droids_survivale}')
+
 @dataclass
 class Stats:
     round_count:int=0
@@ -19,7 +26,7 @@ class Stats:
     clone_survivale:int=0
     droids_survivale:int=0    
 
-
+#random.seed(100)
 
 def battle_simulation(clone_count: int ,droid_count: int, droid_attack_power:int=1,hit_threshold:int=30,verbose_battle:bool=True)->tuple[int ,int]:
     round_count=1
@@ -48,7 +55,7 @@ def battle_simulation(clone_count: int ,droid_count: int, droid_attack_power:int
 
 
 
-    return clone_count,droid_count
+    return (clone_count,droid_count)
 
 
 
@@ -100,7 +107,7 @@ if __name__=='__main__':
         print("Simulation")
 
         battle_list=Simulation_of_battles(clone_count=5,droid_count=8,number_of_fights=1000,verbose=False)
-        print(f'Clone winrate {battle_list.clone_winrate}', f'Droids winrate {battle_list.droids_winrate}', f'Medium rounds {battle_list.medium_round_count}' ,f'Clone survability {battle_list.clone_survivale}', f'Droids survability {battle_list.droids_survivale}',sep='\n')
+        print(battle_list)
     except ValueError as error:
         print(f'Error occur {error}')
 
