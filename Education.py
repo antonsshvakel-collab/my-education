@@ -101,3 +101,7 @@ print(dict(zip(list3,list4)))
 
 data_base=[dict(zip(list3,row)) for row in list4]
 print(data_base)
+
+flt=10
+str1=str(flt)
+print(str1,type(str1),0.1+0.2==0.3)
