@@ -105,3 +105,5 @@ print(data_base)
 flt=10
 str1=str(flt)
 print(str1,type(str1),0.1+0.2==0.3)
+
+смм=10
