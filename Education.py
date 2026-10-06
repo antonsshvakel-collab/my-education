@@ -21,90 +21,57 @@ import requests
 import matplotlib.pyplot as plt
 
 
+sequence=numpy.random.normal(10.0,1.0,500)
 
-words='Hello World!!!'
+a=numpy.array([-1,-2,-3,1,-0,100])
+print(numpy.abs(a))
 
-srez=slice(0,None,2)
+b=numpy.array([True,False,False,True])
+c=numpy.array([False,False,False,True])
 
-print(words[srez])
-
-letters_amazon = '''
-We spent several years building our own database engine,
-Amazon Aurora, a fully-managed MySQL and PostgreSQL-compatible
-service with the same or better durability and availability as
-the commercial engines, but at one-tenth of the cost. We were
-not surprised when this worked.
-'''
-
-find= lambda x,q: x[max(0,x.find(q)-18):x.find(q)+len(q)+18] if q in x else -1
-
-print(find(letters_amazon,'Amazon Aurora'),type(find))
-
-price = [[9.9, 9.8, 9.8, 9.4, 9.5, 9.7],
-        [9.5, 9.4, 9.4, 9.3, 9.2, 9.1],
-        [8.4, 7.9, 7.9, 8.1, 8.0, 8.0],
-        [7.1, 5.9, 4.8, 4.8, 4.7, 3.9]]
-
-sample=[line[::2] for line in price]
-print(sample)
-for line in price:
-    line[::2]=[10] *3
-print(price)
-
-visitors = ['Firefox', 'corrupted', 'Chrome', 'corrupted',
-            'Safari', 'corrupted', 'Safari', 'corrupted',
-            'Chrome', 'corrupted', 'Firefox', 'corrupted']
-
-visitors[1::2]=visitors[::2]
-print(visitors)
-
-nums=numpy.array([1,0,3,0,4,0,6,0,8,0,10,0])
-nums[1::2]=[x+1 for x in nums[::2]]
-nums[1::2]=nums[::2]+1
-print(nums)
-
-cardiac_cycle = [62, 60, 62, 64, 68, 77, 80, 76, 71, 66, 61, 60, 62]
-
-print(cardiac_cycle[2:-2])
-
-expected_cycyles=cardiac_cycle[1:-2]*10
-#plt.plot(expected_cycyles)
-#plt.show()
+print(numpy.logical_and(c,b),c*b)
 
 
-companies = {
-    'CoolCompany' : {'Alice' : 33, 'Bob' : 28, 'Frank' : 29},
-    'CheapCompany' : {'Ann' : 4, 'Lee' : 9, 'Chrisi' : 7},
-    'SosoCompany' : {'Esther' : 38, 'Cole' : 8, 'Paris' : 18}}
+a = numpy.array([[815, 70, 115],
+                [767, 80, 50],
+                [912, 74, 77],
+                [400, 88, 70],
+                [1008, 65, 128]])
 
-illegal = [x for x in companies if any(y<9 for y in companies[x].values())]
-print(illegal)
+mean,stdev=numpy.mean(a,axis=0),numpy.std(a,axis=0)
 
-list1=[1,0]
-tuple1=(1,0)
-set1={1,0}
 
-print(any((list1)),all((list1)))
 
-list1=['Anton','Artem','Maksim']
-list2=[366,278,233]
-zipped=list(zip(list1,list2))
-print(zipped)
+print(mean,stdev,sep='\n')
 
-list1,list2=zip(*zipped)
-print(list(list1),list(list2))
+outliers=((numpy.abs(a[:,0]-mean[0])>stdev[0])
+         *(numpy.abs(a[:,1]-mean[1])>stdev[1])
+         *(numpy.abs(a[:,2]-mean[2])>stdev[2]))
 
-list3=['name','grade','game']
-list4=[('Anton',366,'Dota2'),
-        ('Artem',278,'War thunder'),
-        ('Maksim',233,'Roblox')]
-print(dict(zip(list3,list4)))
+print((numpy.abs(a[:,0]-mean[0])>stdev[0])
+         *(numpy.abs(a[:,1]-mean[1])>stdev[1])
+         *(numpy.abs(a[:,2]-mean[2])>stdev[2]))
 
-data_base=[dict(zip(list3,row)) for row in list4]
-print(data_base)
+print(a[outliers])
 
-flt=10
-str1=str(flt)
-print(str1,type(str1),0.1+0.2==0.3)
+basket = numpy.array([[0, 1, 1, 0],
+                    [0, 1, 0, 1],
+                    [1, 1, 1, 0],
+                    [0, 1, 1, 1],
+                    [1, 1, 1, 0],
+                    [0, 1, 1, 0],
+                    [1, 1, 0, 1],
+                    [1, 1, 1, 1]])
 
-смм=10
+copurchases=numpy.sum(numpy.all(basket[:,2:],axis=1))/basket.shape[0]
+
+print(numpy.all(basket[:,2:],axis=1))
+
+print(copurchases)
+
+copurchases=[(i,j,numpy.sum(basket[:,i]+basket[:,j]==2))
+            for i in range(4) for j in range (i+1,4)]
+
+print(copurchases)
+
+print(max(copurchases,key=lambda x:x[2]))
