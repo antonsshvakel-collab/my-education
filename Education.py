@@ -3,75 +3,97 @@ from decimal import Decimal
 from typing import Self
 from dataclasses import dataclass
 from pathlib import Path
-import math
-import random
-import os
-import shutil
-import builtins
-import cmath
-import re
-import keyword
-import asyncio
-from datetime import datetime, date
-import pytz
-import time
-import threading
 import numpy 
-import requests
-import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression,LinearRegression
+from sklearn.cluster import KMeans
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.neural_network import MLPRegressor
 
 
-sequence=numpy.random.normal(10.0,1.0,500)
+Apple=numpy.array([157,156,159])
+n=len(Apple)
 
-a=numpy.array([-1,-2,-3,1,-0,100])
-print(numpy.abs(a))
+print(type(numpy.arange(n)),type(n))
+model=LinearRegression().fit(numpy.arange(n).reshape((n,1)),Apple)
 
-b=numpy.array([True,False,False,True])
-c=numpy.array([False,False,False,True])
+input_data=numpy.array([[0],
+                        [1],
+                        [2],
+                        [3],
+                        [4],
+                        [5],
+                        [6],
+                        [100],
+                        [23]])
 
-print(numpy.logical_and(c,b),c*b)
+print(model.predict(input_data),type(model),input_data.reshape((-1,1)))
 
+X=numpy.array([ [0, "No"],
+                [10, "No"],
+                [60, "Yes"],
+                [90, "Yes"]])
+n=len(X)
+print(n)
 
-a = numpy.array([[815, 70, 115],
-                [767, 80, 50],
-                [912, 74, 77],
-                [400, 88, 70],
-                [1008, 65, 128]])
+model=LogisticRegression().fit(X[:,0].astype(float).reshape(-1,1),X[:,1])
 
-mean,stdev=numpy.mean(a,axis=0),numpy.std(a,axis=0)
+input_data=numpy.array([[2],
+                        [12],
+                        [13],
+                        [5],
+                        [35],
+                        [36],
+                        [40],
+                        [50]])
 
+print(model.predict(input_data),type(model),X[:,0])
 
+a=numpy.array([range(30,41)]).reshape((-1,1))
 
-print(mean,stdev,sep='\n')
+print(a,model.predict_proba(a))
 
-outliers=((numpy.abs(a[:,0]-mean[0])>stdev[0])
-         *(numpy.abs(a[:,1]-mean[1])>stdev[1])
-         *(numpy.abs(a[:,2]-mean[2])>stdev[2]))
+X = numpy.array([[35, 7000], [45, 6900], [70, 7100],
+                [20, 2000], [25, 2200], [15, 1800]])
 
-print((numpy.abs(a[:,0]-mean[0])>stdev[0])
-         *(numpy.abs(a[:,1]-mean[1])>stdev[1])
-         *(numpy.abs(a[:,2]-mean[2])>stdev[2]))
+kmeans=KMeans(n_clusters=2).fit(X)
 
-print(a[outliers])
+cc=kmeans.cluster_centers_
 
-basket = numpy.array([[0, 1, 1, 0],
-                    [0, 1, 0, 1],
-                    [1, 1, 1, 0],
-                    [0, 1, 1, 1],
-                    [1, 1, 1, 0],
-                    [0, 1, 1, 0],
-                    [1, 1, 0, 1],
-                    [1, 1, 1, 1]])
+print(cc,type(cc),type(kmeans))
 
-copurchases=numpy.sum(numpy.all(basket[:,2:],axis=1))/basket.shape[0]
+X = numpy.array([  [35, 30000], [45, 45000], [40, 50000],
+                [35, 35000], [25, 32500], [40, 40000]])
 
-print(numpy.all(basket[:,2:],axis=1))
+KNN=KNeighborsRegressor(n_neighbors=3).fit(X[:,0].reshape((-1,1)),X[:,1])
 
-print(copurchases)
+a=numpy.array([[35]])
 
-copurchases=[(i,j,numpy.sum(basket[:,i]+basket[:,j]==2))
-            for i in range(4) for j in range (i+1,4)]
+res=KNN.predict(a)
+print(type(KNN),res,type(res))
 
-print(copurchases)
+X = numpy.array(
+    [[20,  11,  20,  30,  4000,  3000],
+    [12,   4,   0,   0, 1000,  1500],
+    [2,   0,   1,  10,   0,  1400],
+    [35,   5,  10,  70,  6000,  3800],
+    [30,   1,   4,  65,   0,  3900],
+    [35,   1,   0,   0,   0, 100],
+    [15,   1,   2,  25,   0,  3700],
+    [40,   3,  -1,  60,  1000,  2000],
+    [40,   1,   2,  95,   0,  1000],
+    [10,   0,   0,   0,   0,  1400],
+    [30,   1,   0,  50,   0,  1700],
+    [1,   0,   0,  45,   0,  1762],
+    [10,  32,  10,   5,   0,  2400],
+    [5,  35,   4,   0, 13000,  3900],
+    [8,   9,  40,  30,  1000,  2625],
+    [1,   0,   1,   0,   0,  1900],
+    [1,  30,  10,   0,  1000,  1900],
+    [7,  16,   5,   0,   0,  3000]])
 
-print(max(copurchases,key=lambda x:x[2]))
+neural_net=MLPRegressor(max_iter=10000).fit(X[:,:-1],X[:,-1])
+
+a=numpy.array([20,1,10,50,1000]).reshape(1,-1)
+
+res=neural_net.predict(a)
+print(res)
